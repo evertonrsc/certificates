@@ -62,7 +62,7 @@ public class GMailService {
             email.setSubject(subject);
 
             MimeBodyPart bodyPart = new MimeBodyPart();
-            bodyPart.setText(bodyText);
+            bodyPart.setContent(bodyText, "text/html; charset=utf-8");
 
             MimeBodyPart attachmentPart = new MimeBodyPart();
             FileDataSource fileDataSource = new FileDataSource(attachment);

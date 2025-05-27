@@ -36,3 +36,4 @@ build/
 /.idea/
 /.idea/vcs.xml
 /resources/data/inscritos-sbrc2025.csv
+/auth/

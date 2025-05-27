@@ -16,11 +16,11 @@ public class CsvImporterAttendees {
 
     public List<Attendee> loadAttendees() {
         try (Reader reader = new FileReader(csvFile)) {
-            CsvToBean<Attendee> csvToBean = new CsvToBeanBuilder<Attendee>(reader).
-                    withType(Attendee.class).
-                    withIgnoreLeadingWhiteSpace(true).
-                    withSkipLines(1).
-                    build();
+            CsvToBean<Attendee> csvToBean = new CsvToBeanBuilder<Attendee>(reader)
+                    .withType(Attendee.class)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .withSkipLines(1)
+                    .build();
             return csvToBean.parse();
         } catch (IOException e) {
             throw new RuntimeException(e);

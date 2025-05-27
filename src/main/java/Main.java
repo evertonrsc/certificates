@@ -24,15 +24,33 @@ public class Main {
 
         GMailService gmailService = new GMailService(new AuthService());
 
-        CertificateGenerator cg = new CertificateGenerator(new Certificate(TEMPLATE_FILE, FONT_FILE),
-                OUTPUT, FONT_SIZE, POSITION_Y);
         for (Attendee attendee : attendeeList) {
+            CertificateGenerator cg = new CertificateGenerator(new Certificate(TEMPLATE_FILE, FONT_FILE),
+                    OUTPUT, FONT_SIZE, POSITION_Y);
             String certificateFile = cg.generate(attendee);
 
-            gmailService.sendEmailWithAttachment(EMAIL_FROM, "everton.cavalcante@ufrn.br",
-                    EMAIL_SUBJECT, "Teste de Envio de Certificado", new File(certificateFile));
+            String bodyText = String.format("""
+                <html>
+                    <body>
+                        <p>Prezado(a) %s,</p>
+                        <p>Agradecemos novamente por sua participação no SBRC 2025, realizado em Natal-RN.</p>
+                        <p>Em anexo, enviamos o seu <strong>Certificado de Participação</strong> no evento.<br/>
+                        Caso identifique qualquer inconsistência, pedimos a gentileza de entrar em contato pelo e-mail
+                        <a href="mailto:sbrc2025@ufrn.br">sbrc2025@ufrn.br</a>.</p>
+                        <p>Finalmente, gostaríamos de convidá-lo(a) a responder a uma <strong>pesquisa de satisfação</strong>,
+                        acessível pelo link abaixo:<br/>
+                        <a href="https://forms.gle/gSLrGNnnXMJvUoyG6" target="_blank">https://forms.gle/gSLrGNnnXMJvUoyG6</a>.<br/>
+                        Sua opinião é muito importante para nós e ajudará a aprimorar futuras edições do SBRC.<br/>
+                        A participação é voluntária e as respostas serão mantidas em total anonimato.</p>
+                        <p><em>Everton Cavalcante e Roger Kreutz Immich<br/>
+                        Coordenadores Gerais do SBRC 2025</em></p>
+                    </body>
+                </html>
+                """, attendee.getName());
+
+            gmailService.sendEmailWithAttachment(EMAIL_FROM, attendee.getEmail(),
+                    EMAIL_SUBJECT, bodyText, new File(certificateFile));
             System.out.println();
-            break;
         }
     }
 }

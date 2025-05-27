@@ -6,7 +6,9 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class Certificate {
     private final PDDocument document;
@@ -17,7 +19,9 @@ public class Certificate {
         try {
             document = Loader.loadPDF(new File(templateFile));
             page = document.getPage(0);
-            font = PDType0Font.load(document, new File(fontFile));
+
+            InputStream fontStream = new FileInputStream(fontFile);
+            font = PDType0Font.load(document, fontStream, true);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

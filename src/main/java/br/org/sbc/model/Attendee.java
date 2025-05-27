@@ -1,15 +1,18 @@
 package br.org.sbc.model;
 
+import com.opencsv.bean.CsvBindByPosition;
+
 public class Attendee {
+    @CsvBindByPosition(position = 0)
     private int id;
+
+    @CsvBindByPosition(position = 1)
     private String name;
+
+    @CsvBindByPosition(position = 2)
     private String email;
 
-    public Attendee(int id, String name, String email) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-    }
+    public Attendee() {}
 
     public int getId() {
         return id;

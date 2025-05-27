@@ -5,7 +5,7 @@ import br.org.sbc.model.Certificate;
 
 public class Main {
     public static final String TEMPLATE_FILE = "resources/templates/certificado-sbrc2025.pdf";
-    public static final String FONT_FILE = "/fonts/OpenSans-SemiBold.ttf";
+    public static final String FONT_FILE = "resources/fonts/OpenSans-SemiBold.ttf";
     public static final String OUTPUT = "certificado-sbrc2025";
     public static final float FONT_SIZE = 18;
     public static final float POSITION_Y = 305;

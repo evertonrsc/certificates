@@ -1,6 +1,5 @@
 package br.org.sbc.model;
 
-import br.org.sbc.CertificateGenerator;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -8,7 +7,6 @@ import org.apache.pdfbox.pdmodel.font.PDType0Font;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 public class Certificate {
     private final PDDocument document;
@@ -19,12 +17,7 @@ public class Certificate {
         try {
             document = Loader.loadPDF(new File(templateFile));
             page = document.getPage(0);
-
-            InputStream fontStream = CertificateGenerator.class.getResourceAsStream(fontFile);
-            if (fontStream == null) {
-                throw new RuntimeException("Font file not found");
-            }
-            font = PDType0Font.load(document, fontStream);
+            font = PDType0Font.load(document, new File(fontFile));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

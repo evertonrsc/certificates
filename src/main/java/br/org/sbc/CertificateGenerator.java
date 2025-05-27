@@ -26,10 +26,10 @@ public class CertificateGenerator {
         this.positionY = positionY;
     }
 
-    public void generate(Attendee attendee) {
+    public String generate(Attendee attendee) {
         insertAttendeeName(attendee);
         applyReadOnlyPermissions();
-        saveCertificate(attendee);
+        return saveCertificate(attendee);
     }
 
     private void insertAttendeeName(Attendee attendee) {
@@ -66,7 +66,7 @@ public class CertificateGenerator {
         }
     }
 
-    private void saveCertificate(Attendee attendee) {
+    private String saveCertificate(Attendee attendee) {
         String outputFile = "certificates" + File.separator + outputPrefix + "_" + attendee.getId() + ".pdf";
         Path path = Paths.get(outputFile);
         if (Files.exists(path)) {
@@ -81,6 +81,7 @@ public class CertificateGenerator {
             certificate.getDocument().save(outputFile);
             certificate.getDocument().close();
             System.out.println("> Certificate generated for " + attendee.getName());
+            return outputFile;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

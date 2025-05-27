@@ -9,12 +9,14 @@ import java.io.File;
 import java.util.List;
 
 public class Main {
-    public static final String REGISTRANTS_FILE = "resources/data/inscritos-sbrc2025.csv";
-    public static final String TEMPLATE_FILE = "resources/templates/certificado-sbrc2025.pdf";
-    public static final String FONT_FILE = "resources/fonts/OpenSans-SemiBold.ttf";
-    public static final String OUTPUT = "certificado-sbrc2025";
-    public static final float FONT_SIZE = 18;
-    public static final float POSITION_Y = 305;
+    private static final String REGISTRANTS_FILE = "resources/data/inscritos-sbrc2025.csv";
+    private static final String TEMPLATE_FILE = "resources/templates/certificado-sbrc2025.pdf";
+    private static final String FONT_FILE = "resources/fonts/OpenSans-SemiBold.ttf";
+    private static final String OUTPUT = "certificado-sbrc2025";
+    private static final float FONT_SIZE = 18;
+    private static final float POSITION_Y = 305;
+    private static final String EMAIL_FROM = "sbrc2025@ufrn.br";
+    private static final String EMAIL_SUBJECT = "[SBRC 2025] Certificado de Participação";
 
     public static void main(String[] args) {
         CsvImporterAttendees csvImporter = new CsvImporterAttendees(REGISTRANTS_FILE);
@@ -25,11 +27,11 @@ public class Main {
         CertificateGenerator cg = new CertificateGenerator(new Certificate(TEMPLATE_FILE, FONT_FILE),
                 OUTPUT, FONT_SIZE, POSITION_Y);
         for (Attendee attendee : attendeeList) {
-            cg.generate(attendee);
+            String certificateFile = cg.generate(attendee);
 
-            gmailService.sendEmailWithAttachment("sbrc2025@ufrn.br", "everton.cavalcante@ufrn.br",
-                    "[SBRC 2025] Teste", "Teste de Envio de Certificado", new File(TEMPLATE_FILE));
-
+            gmailService.sendEmailWithAttachment(EMAIL_FROM, "everton.cavalcante@ufrn.br",
+                    EMAIL_SUBJECT, "Teste de Envio de Certificado", new File(certificateFile));
+            System.out.println();
             break;
         }
     }

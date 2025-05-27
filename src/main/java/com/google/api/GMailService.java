@@ -46,6 +46,7 @@ public class GMailService {
         Gmail gmailClient = createGmailClient();
         try {
             gmailClient.users().messages().send("me", message).execute();
+            System.out.println("> Email sent successfully to " + to);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

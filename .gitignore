@@ -35,5 +35,5 @@ build/
 .DS_Store
 /.idea/
 /.idea/vcs.xml
-/resources/data/inscritos-sbrc2025.csv
+/resources/data/
 /auth/

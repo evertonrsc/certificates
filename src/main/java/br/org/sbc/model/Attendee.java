@@ -4,7 +4,7 @@ import com.opencsv.bean.CsvBindByPosition;
 
 public class Attendee {
     @CsvBindByPosition(position = 0)
-    private int id;
+    private String id;
 
     @CsvBindByPosition(position = 1)
     private String name;
@@ -14,11 +14,11 @@ public class Attendee {
 
     public Attendee() {}
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -1,6 +1,5 @@
-package br.org.sbc;
+package br.org.sbc.generator;
 
-import br.org.sbc.generator.AbstractCertificateGenerator;
 import br.org.sbc.model.Attendee;
 import br.org.sbc.model.Certificate;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;

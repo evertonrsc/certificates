@@ -1,4 +1,4 @@
-import br.org.sbc.CertificateGenerator;
+import br.org.sbc.AttendanceCertificateGeneratorSbrc;
 import br.org.sbc.CsvImporterAttendees;
 import com.google.api.AuthService;
 import com.google.api.GMailService;
@@ -8,7 +8,7 @@ import br.org.sbc.model.Certificate;
 import java.io.File;
 import java.util.List;
 
-public class Main {
+public class AttendanceCertificatesSbrc {
     private static final String REGISTRANTS_FILE = "resources/data/inscritos-sbrc2025.csv";
     private static final String TEMPLATE_FILE = "resources/templates/certificado-sbrc2025.pdf";
     private static final String FONT_FILE = "resources/fonts/OpenSans-SemiBold.ttf";
@@ -25,8 +25,8 @@ public class Main {
         GMailService gmailService = new GMailService(new AuthService());
 
         for (Attendee attendee : attendeeList) {
-            CertificateGenerator cg = new CertificateGenerator(new Certificate(TEMPLATE_FILE, FONT_FILE),
-                    OUTPUT, FONT_SIZE, POSITION_Y);
+            AttendanceCertificateGeneratorSbrc cg = new AttendanceCertificateGeneratorSbrc(
+                    new Certificate(TEMPLATE_FILE, FONT_FILE), OUTPUT, FONT_SIZE, POSITION_Y);
             String certificateFile = cg.generate(attendee);
 
             String bodyText = String.format("""

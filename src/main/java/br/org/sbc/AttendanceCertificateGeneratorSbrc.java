@@ -1,38 +1,28 @@
 package br.org.sbc;
 
+import br.org.sbc.generator.AbstractCertificateGenerator;
 import br.org.sbc.model.Attendee;
 import br.org.sbc.model.Certificate;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
-import org.apache.pdfbox.pdmodel.encryption.StandardProtectionPolicy;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.UUID;
 
-public class CertificateGenerator {
-    private final Certificate certificate;
-    private final String outputPrefix;
-    private final float fontSize;
-    private final float positionY;
+public class AttendanceCertificateGeneratorSbrc extends AbstractCertificateGenerator {
 
-    public CertificateGenerator(Certificate certificate, String outputPrefix, float fontSize, float positionY) {
+    public AttendanceCertificateGeneratorSbrc(Certificate certificate, String outputPrefix,
+                                              float fontSize, float positionY) {
         this.certificate = certificate;
         this.outputPrefix = outputPrefix;
         this.fontSize = fontSize;
         this.positionY = positionY;
     }
 
-    public String generate(Attendee attendee) {
-        insertAttendeeName(attendee);
-        applyReadOnlyPermissions();
-        return saveCertificate(attendee);
-    }
-
-    private void insertAttendeeName(Attendee attendee) {
+    @Override
+    protected void insertAttendeeName(Attendee attendee) {
         try {
             float stringWidth = certificate.getFont().getStringWidth(attendee.getName()) / 1000 * fontSize;
             float pageWidth = certificate.getPage().getMediaBox().getWidth();
@@ -51,22 +41,8 @@ public class CertificateGenerator {
         }
     }
 
-    private void applyReadOnlyPermissions() {
-        AccessPermission ap = new AccessPermission();
-        ap.setCanPrint(true);                               // allow printing
-        ap.setCanModify(false);                             // prevent modification
-        ap.setCanExtractContent(false);                     // prevent copying/extracting
-
-        String password = UUID.randomUUID().toString();     // random password
-        StandardProtectionPolicy spp = new StandardProtectionPolicy(password, null, ap);
-        try {
-            certificate.getDocument().protect(spp);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private String saveCertificate(Attendee attendee) {
+    @Override
+    protected String saveCertificate(Attendee attendee) {
         String outputFile = "certificates" + File.separator + outputPrefix + "_" + attendee.getId() + ".pdf";
         Path path = Paths.get(outputFile);
         if (Files.exists(path)) {

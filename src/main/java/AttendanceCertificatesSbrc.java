@@ -1,4 +1,4 @@
-import br.org.sbc.generator.AttendanceCertificateGeneratorSbrc;
+import br.org.sbc.generators.AttendanceCertificateGeneratorSbrc;
 import br.org.sbc.CsvImporterAttendees;
 import com.google.api.AuthService;
 import com.google.api.GMailService;

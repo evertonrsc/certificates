@@ -1,4 +1,4 @@
-package br.org.sbc.generator;
+package br.org.sbc.generators;
 
 import br.org.sbc.model.Attendee;
 import br.org.sbc.model.Certificate;

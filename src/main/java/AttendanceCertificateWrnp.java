@@ -1,5 +1,5 @@
 import br.org.sbc.CsvImporterAttendees;
-import br.org.sbc.generator.AttendanceCertificateGeneratorWrnp;
+import br.org.sbc.generators.AttendanceCertificateGeneratorWrnp;
 import br.org.sbc.model.Attendee;
 import br.org.sbc.model.Certificate;
 import com.google.api.AuthService;

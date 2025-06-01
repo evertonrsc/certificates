@@ -1,4 +1,4 @@
-package br.org.sbc;
+package br.org.sbc.importers;
 
 import br.org.sbc.model.Attendee;
 import com.opencsv.bean.CsvToBean;

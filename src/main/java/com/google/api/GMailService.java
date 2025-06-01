@@ -23,7 +23,7 @@ import jakarta.mail.internet.*;
 public class GMailService {
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
     private static final NetHttpTransport HTTP_TRANSPORT = new NetHttpTransport();
-    private static final String APPLICATION_NAME = "Gmail Java App";
+    private static final String APPLICATION_NAME = "Java App";
 
     private final AuthService authService;
 
@@ -32,9 +32,7 @@ public class GMailService {
     }
 
     public Gmail createGmailClient() {
-        List<String> scopes = List.of(GmailScopes.GMAIL_SEND);
-        Credential credential = authService.getCredentials(scopes);
-
+        Credential credential = authService.getCredentials();
         return new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
                 .setApplicationName(APPLICATION_NAME)
                 .build();

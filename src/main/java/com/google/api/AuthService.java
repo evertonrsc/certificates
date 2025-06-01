@@ -12,6 +12,7 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AuthService {
@@ -19,8 +20,13 @@ public class AuthService {
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
     private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
     private static final String CREDENTIALS_FILE = "auth/credentials.json";
+    private final List<String> scopes;
 
-    public Credential getCredentials(List<String> scopes) {
+    public AuthService(List<String> scopes) {
+        this.scopes = scopes;
+    }
+
+    public Credential getCredentials() {
          try {
             GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY,
                     new InputStreamReader(new FileInputStream(CREDENTIALS_FILE)));

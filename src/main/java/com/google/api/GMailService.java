@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
-import java.util.List;
 import java.util.Properties;
 
 import com.google.api.client.auth.oauth2.Credential;
@@ -12,7 +11,6 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.services.gmail.Gmail;
-import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.model.Message;
 import jakarta.activation.DataHandler;
 import jakarta.activation.FileDataSource;

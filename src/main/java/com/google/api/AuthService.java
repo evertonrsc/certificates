@@ -12,7 +12,6 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AuthService {

@@ -2,8 +2,6 @@ package br.org.sbc.generators;
 
 import br.org.sbc.model.Attendee;
 import br.org.sbc.model.Certificate;
-import br.org.sbc.model.Language;
-import br.org.sbc.model.Paper;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 
 import java.io.File;

@@ -5,7 +5,6 @@ import br.org.sbc.model.Language;
 import br.org.sbc.model.Paper;
 import com.google.api.AuthService;
 import com.google.api.GSheetsService;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.List;

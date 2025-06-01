@@ -1,6 +1,5 @@
 package br.org.sbc.generators;
 
-import br.org.sbc.model.Attendee;
 import br.org.sbc.model.Certificate;
 import org.apache.pdfbox.pdmodel.encryption.AccessPermission;
 import org.apache.pdfbox.pdmodel.encryption.StandardProtectionPolicy;

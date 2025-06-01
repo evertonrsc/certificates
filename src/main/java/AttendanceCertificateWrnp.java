@@ -1,9 +1,7 @@
 import br.org.sbc.importers.CsvImporterAttendees;
 import br.org.sbc.generators.AttendanceCertificateGeneratorWrnp;
-import br.org.sbc.importers.GSheetImporterPapersAuthors;
 import br.org.sbc.model.Attendee;
 import br.org.sbc.model.Certificate;
-import br.org.sbc.model.Paper;
 import com.google.api.AuthService;
 import com.google.api.GMailService;
 import com.google.api.services.gmail.GmailScopes;

@@ -1,9 +1,10 @@
 import br.org.sbc.generators.AttendanceCertificateGeneratorSbrc;
-import br.org.sbc.CsvImporterAttendees;
+import br.org.sbc.importers.CsvImporterAttendees;
 import com.google.api.AuthService;
 import com.google.api.GMailService;
 import br.org.sbc.model.Attendee;
 import br.org.sbc.model.Certificate;
+import com.google.api.services.gmail.GmailScopes;
 
 import java.io.File;
 import java.util.List;
@@ -22,7 +23,7 @@ public class AttendanceCertificatesSbrc {
         CsvImporterAttendees csvImporter = new CsvImporterAttendees(REGISTRANTS_FILE);
         List<Attendee> attendeeList = csvImporter.loadAttendees();
 
-        GMailService gmailService = new GMailService(new AuthService());
+        GMailService gmailService = new GMailService(new AuthService(List.of(GmailScopes.GMAIL_SEND)));
 
         for (Attendee attendee : attendeeList) {
             AttendanceCertificateGeneratorSbrc cg = new AttendanceCertificateGeneratorSbrc(

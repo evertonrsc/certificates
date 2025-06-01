@@ -2,6 +2,8 @@ package br.org.sbc.generators;
 
 import br.org.sbc.model.Attendee;
 import br.org.sbc.model.Certificate;
+import br.org.sbc.model.Language;
+import br.org.sbc.model.Paper;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 
 import java.io.File;
@@ -20,8 +22,13 @@ public class AttendanceCertificateGeneratorSbrc extends AbstractCertificateGener
         this.positionY = positionY;
     }
 
-    @Override
-    protected void insertAttendeeName(Attendee attendee) {
+    public String generate(Attendee attendee) {
+        insertAttendeeName(attendee);
+        applyReadOnlyPermissions();
+        return saveCertificate(attendee);
+    }
+
+    private void insertAttendeeName(Attendee attendee) {
         try {
             float stringWidth = certificate.getFont().getStringWidth(attendee.getName()) / 1000 * fontSize;
             float pageWidth = certificate.getPage().getMediaBox().getWidth();
@@ -40,8 +47,7 @@ public class AttendanceCertificateGeneratorSbrc extends AbstractCertificateGener
         }
     }
 
-    @Override
-    protected String saveCertificate(Attendee attendee) {
+    private String saveCertificate(Attendee attendee) {
         String outputFile = "certificates" + File.separator + outputPrefix + "_" + attendee.getId() + ".pdf";
         Path path = Paths.get(outputFile);
         if (Files.exists(path)) {

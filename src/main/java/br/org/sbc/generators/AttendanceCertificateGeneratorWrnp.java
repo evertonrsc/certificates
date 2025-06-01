@@ -19,8 +19,13 @@ public class AttendanceCertificateGeneratorWrnp extends AbstractCertificateGener
         this.positionY = positionY;
     }
 
-    @Override
-    protected void insertAttendeeName(Attendee attendee) {
+    public String generate(Attendee attendee) {
+        insertAttendeeName(attendee);
+        applyReadOnlyPermissions();
+        return saveCertificate(attendee);
+    }
+
+    private void insertAttendeeName(Attendee attendee) {
         try {
             float stringWidth = certificate.getFont().getStringWidth(attendee.getName()) / 1000 * fontSize;
             float pageWidth = certificate.getPage().getMediaBox().getWidth();
@@ -39,8 +44,7 @@ public class AttendanceCertificateGeneratorWrnp extends AbstractCertificateGener
         }
     }
 
-    @Override
-    protected String saveCertificate(Attendee attendee) {
+    private String saveCertificate(Attendee attendee) {
         String outputFile = "certificates" + File.separator + outputPrefix + "_" + attendee.getId() + ".pdf";
         Path path = Paths.get(outputFile);
         if (Files.exists(path)) {

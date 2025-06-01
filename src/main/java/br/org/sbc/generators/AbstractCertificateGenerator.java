@@ -14,14 +14,6 @@ public abstract class AbstractCertificateGenerator {
     protected float fontSize;
     protected float positionY;
 
-    public String generate(Attendee attendee) {
-        insertAttendeeName(attendee);
-        applyReadOnlyPermissions();
-        return saveCertificate(attendee);
-    }
-
-    protected abstract void insertAttendeeName(Attendee attendee);
-
     protected void applyReadOnlyPermissions() {
         AccessPermission ap = new AccessPermission();
         ap.setCanPrint(true);                               // allow printing
@@ -36,6 +28,4 @@ public abstract class AbstractCertificateGenerator {
             throw new RuntimeException(e);
         }
     }
-
-    protected abstract String saveCertificate(Attendee attendee);
 }

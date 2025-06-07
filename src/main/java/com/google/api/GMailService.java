@@ -36,6 +36,18 @@ public class GMailService {
                 .build();
     }
 
+    public void sendEmail(String from, String to, String subject, String bodyText) {
+        MimeMessage mimeMessage = createEmail(from, to, subject, bodyText);
+        Message message = createMessageWithEmail(mimeMessage);
+        Gmail gmailClient = createGmailClient();
+        try {
+            gmailClient.users().messages().send("me", message).execute();
+            System.out.println("> Email sent successfully to " + to);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void sendEmailWithAttachment(String from, String to, String subject, String bodyText, File attachment) {
         MimeMessage mimeMessage = createEmailWithAttachment(from, to, subject, bodyText, attachment);
         Message message = createMessageWithEmail(mimeMessage);
@@ -44,6 +56,26 @@ public class GMailService {
             gmailClient.users().messages().send("me", message).execute();
             System.out.println("> Email sent successfully to " + to);
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private MimeMessage createEmail(String from, String to, String subject, String bodyText) {
+        Session session = Session.getDefaultInstance(new Properties(), null);
+        MimeMessage email = new MimeMessage(session);
+        try {
+            email.setFrom(new InternetAddress(from));
+            email.addRecipient(MimeMessage.RecipientType.TO, new InternetAddress(to));
+            email.setSubject(subject);
+
+            MimeBodyPart bodyPart = new MimeBodyPart();
+            bodyPart.setContent(bodyText, "text/html; charset=utf-8");
+
+            MimeMultipart multipart = new MimeMultipart();
+            multipart.addBodyPart(bodyPart);
+            email.setContent(multipart);
+            return email;
+        } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
     }

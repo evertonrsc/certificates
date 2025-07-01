@@ -49,7 +49,7 @@ public class PresentationCertificateWBlockchain {
                     <body>
                         <p>Prezado(a) %s,</p>
                         <p>Em anexo, enviamos o <strong>Certificado de Apresentação</strong> do seu artigo
-                        intitulado "%s" no W6G 2025.<br/>
+                        intitulado "%s" no WBlockchain 2025.<br/>
                         Caso identifique qualquer inconsistência, pedimos a gentileza de entrar em contato
                         pelo e-mail <a href="mailto:sbrc2025@ufrn.br">sbrc2025@ufrn.br</a>.</p>
                         <p><em>Jéferson Campos Nobre e Luiz Rodrigues<br/>

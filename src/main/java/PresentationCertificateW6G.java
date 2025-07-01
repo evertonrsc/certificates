@@ -33,11 +33,11 @@ public class PresentationCertificateW6G {
         GSheetImporterPapersAuthors importerPapersAuthors = new GSheetImporterPapersAuthors(
                 authService, PAPER_SPREADSHEET_ID, PAPER_SHEET_RANGE, AUTHOR_SPREADSHEET_ID, AUTHOR_SHEET_RANGE);
 
-        List<Paper> papersCoUrb = importerPapersAuthors.loadPapersWithAuthors();
+        List<Paper> papersW6g = importerPapersAuthors.loadPapersWithAuthors();
 
         GMailService gmailService = new GMailService(authService);
 
-        for (Paper paper : papersCoUrb) {
+        for (Paper paper : papersW6g) {
             PresentationCertificateGeneratorSbrc cg = new PresentationCertificateGeneratorSbrc(
                     new Certificate(TEMPLATE_FILE, RFONT_FILE), IFONT_FILE, OUTPUT, FONT_SIZE,
                     POSITION_PAPER_TITLE, POSITION_AUTHOR_LIST);

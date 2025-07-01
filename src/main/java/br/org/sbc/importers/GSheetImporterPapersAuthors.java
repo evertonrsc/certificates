@@ -45,7 +45,15 @@ public class GSheetImporterPapersAuthors {
                         authorName += authorEntry.get(2).toString().replaceFirst("\\s+$", "") + " ";
                     }
                     authorName += authorEntry.get(3).toString().replaceFirst("\\s+$", "");
-                    authors.add(new Author(authorName, authorEntry.get(7).toString()));
+
+                    String authorEmail = "";
+                    try {
+                        authorEmail = authorEntry.get(7).toString();
+                    } catch (IndexOutOfBoundsException e) {
+                        authorEmail = "";
+                    } finally {
+                        authors.add(new Author(authorName, authorEmail));
+                    }
                 }
             }
 
